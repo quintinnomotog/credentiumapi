@@ -23,7 +23,7 @@ public class CriptografiaController {
 	}
 	
 	@PostMapping("/decoder/aes")
-	public ResponseEntity<String> descriptografarAES(String senha) {
+	public ResponseEntity<String> descriptografarAES(@RequestBody String senha) {
 		return ResponseEntity.ok().body(this.criptografiaService.descriptografar(senha));
 	}
 	

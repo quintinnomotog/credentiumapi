@@ -17,7 +17,9 @@ public class SegurancaConfiguration {
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.csrf(csrf -> csrf.disable())
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-				.authorizeHttpRequests(authorize -> authorize.requestMatchers(HttpMethod.POST, "/credencium/criptografia/encoder/aes").permitAll()
+				.authorizeHttpRequests(authorize -> authorize
+						.requestMatchers(HttpMethod.POST, "/credencium/criptografia/encoder/aes").permitAll()
+						.requestMatchers(HttpMethod.POST, "/credencium/criptografia/decoder/aes").permitAll()
 						.anyRequest().authenticated())
 				.cors(Customizer.withDefaults());
 		return httpSecurity.build();
