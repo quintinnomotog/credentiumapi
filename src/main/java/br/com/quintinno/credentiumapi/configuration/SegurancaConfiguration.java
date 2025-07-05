@@ -18,6 +18,7 @@ public class SegurancaConfiguration {
 		httpSecurity.csrf(csrf -> csrf.disable())
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(authorize -> authorize
+						.requestMatchers(HttpMethod.GET, "/**").permitAll()
 						.requestMatchers(HttpMethod.POST, "/credencium/criptografia/encoder/aes").permitAll()
 						.requestMatchers(HttpMethod.POST, "/credencium/criptografia/decoder/aes").permitAll()
 						.anyRequest().authenticated())
