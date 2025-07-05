@@ -1,7 +1,11 @@
 package br.com.quintinno.credentiumapi;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,6 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class Application implements CommandLineRunner {
 	
 	private static final Logger logger = LoggerFactory.getLogger(Application.class);
+	
+	@Value("${spring.application.name}")
+	private String nomeAPI;
+	
+	@Value("${server.port}")
+	private String portaAPI;
+	
+	private static final String BUILD_DATE = LocalDateTime.now()
+            .format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -25,10 +38,8 @@ public class Application implements CommandLineRunner {
 	
 	@GetMapping({"", "/"})
 	public String getInfoAPI() {
-		return "[ Application: CredentiumAPI | "
-				.concat("Version: v1.0.0.0 | ")
-				.concat("Port: 8081 | ")
-				.concat("Build: 05/07/2025 13:35:54 ]");
+		return String.format("[ Application: %s | Version: %s | Port: %s | Build: %s ]", 
+				nomeAPI, getClass().getPackage().getImplementationVersion(), portaAPI, BUILD_DATE);
 	}
 
 }
