@@ -38,7 +38,7 @@ public class Application implements CommandLineRunner {
 	
 	@GetMapping({"", "/"})
 	public String getInfoAPI() {
-		return String.format("[ Application: %s | Version: %s | Port: %s | Build: %s ]", 
+		return String.format("[ Application: %s | Version: %s | Port: %s | Build: %s ]",
 				nomeAPI, getClass().getPackage().getImplementationVersion(), portaAPI, BUILD_DATE);
 	}
 
