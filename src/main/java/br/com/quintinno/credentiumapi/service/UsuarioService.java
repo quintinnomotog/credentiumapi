@@ -12,12 +12,17 @@ import br.com.quintinno.credentiumapi.transfer.UsuarioResponseTransfer;
 public class UsuarioService {
 	
 	private final UsuarioRepository usuarioRepository;
+	
+	private final CriptografiaService criptografiaService;
 
-	public UsuarioService(UsuarioRepository usuarioRepository) {
+	public UsuarioService(UsuarioRepository usuarioRepository, CriptografiaService criptografiaService) {
 		this.usuarioRepository = usuarioRepository;
+		this.criptografiaService = criptografiaService;
 	}
 	
 	public UsuarioResponseTransfer create(UsuarioRequestTransfer usuarioRequestTransfer) {
+		String senhaCriptografada = this.criptografiaService.criptografar(usuarioRequestTransfer.getSenha());
+		usuarioRequestTransfer.setSenha(senhaCriptografada);
 		UsuarioEntity usuarioEntity = this.usuarioRepository.save(UsuarioMapper.toUsuarioEntity(usuarioRequestTransfer));
 		return UsuarioMapper.toUsuarioResponseTransfer(usuarioEntity);
 	}

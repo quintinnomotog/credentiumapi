@@ -1,6 +1,5 @@
 package br.com.quintinno.credentiumapi.mapper;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import br.com.quintinno.credentiumapi.entity.UsuarioEntity;
