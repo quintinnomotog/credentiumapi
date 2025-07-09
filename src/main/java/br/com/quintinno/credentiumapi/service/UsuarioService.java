@@ -21,10 +21,17 @@ public class UsuarioService {
 	}
 	
 	public UsuarioResponseTransfer create(UsuarioRequestTransfer usuarioRequestTransfer) {
-		String senhaCriptografada = this.criptografiaService.criptografar(usuarioRequestTransfer.getSenha());
-		usuarioRequestTransfer.setSenha(senhaCriptografada);
+		getCriptografarSenha(usuarioRequestTransfer);
+		if (!usuarioRepository.findByIdentificador(usuarioRequestTransfer.getIdentificador()).isEmpty()) {
+			throw new IllegalArgumentException("Já existe um usuário cadstrado com esse identificador!");
+		}
 		UsuarioEntity usuarioEntity = this.usuarioRepository.save(UsuarioMapper.toUsuarioEntity(usuarioRequestTransfer));
 		return UsuarioMapper.toUsuarioResponseTransfer(usuarioEntity);
+	}
+
+	private void getCriptografarSenha(UsuarioRequestTransfer usuarioRequestTransfer) {
+		String senhaCriptografada = this.criptografiaService.criptografar(usuarioRequestTransfer.getSenha());
+		usuarioRequestTransfer.setSenha(senhaCriptografada);
 	}
 
 }
