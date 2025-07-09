@@ -1,5 +1,7 @@
 package br.com.quintinno.credentiumapi.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +22,8 @@ public class UsuarioController {
 	}
 
 	@PostMapping("/v1")
-	public UsuarioResponseTransfer create(@RequestBody UsuarioRequestTransfer usuarioRequestTransfer) {
-		return this.usuarioService.create(usuarioRequestTransfer);
+	public ResponseEntity<UsuarioResponseTransfer> create(@RequestBody UsuarioRequestTransfer usuarioRequestTransfer) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(this.usuarioService.create(usuarioRequestTransfer));
 	}
 
 }
