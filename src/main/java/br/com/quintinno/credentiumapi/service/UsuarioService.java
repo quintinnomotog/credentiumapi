@@ -6,6 +6,7 @@ import br.com.quintinno.credentiumapi.entity.UsuarioEntity;
 import br.com.quintinno.credentiumapi.mapper.UsuarioMapper;
 import br.com.quintinno.credentiumapi.repository.UsuarioRepository;
 import br.com.quintinno.credentiumapi.transfer.UsuarioRequestTransfer;
+import br.com.quintinno.credentiumapi.transfer.UsuarioResponseTransfer;
 
 @Service
 public class UsuarioService {
@@ -16,8 +17,9 @@ public class UsuarioService {
 		this.usuarioRepository = usuarioRepository;
 	}
 	
-	public UsuarioEntity create(UsuarioRequestTransfer usuarioRequestTransfer) {
-		return this.usuarioRepository.save(UsuarioMapper.toUsuarioEntity(usuarioRequestTransfer));
+	public UsuarioResponseTransfer create(UsuarioRequestTransfer usuarioRequestTransfer) {
+		UsuarioEntity usuarioEntity = this.usuarioRepository.save(UsuarioMapper.toUsuarioEntity(usuarioRequestTransfer));
+		return UsuarioMapper.toUsuarioResponseTransfer(usuarioEntity);
 	}
 
 }

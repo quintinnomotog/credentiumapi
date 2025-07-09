@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.quintinno.credentiumapi.entity.UsuarioEntity;
 import br.com.quintinno.credentiumapi.service.UsuarioService;
 import br.com.quintinno.credentiumapi.transfer.UsuarioRequestTransfer;
+import br.com.quintinno.credentiumapi.transfer.UsuarioResponseTransfer;
 
 @RestController
 @RequestMapping("credentium/api")
@@ -20,7 +20,7 @@ public class UsuarioController {
 	}
 
 	@PostMapping("/v1")
-	public UsuarioEntity create(@RequestBody UsuarioRequestTransfer usuarioRequestTransfer) {
+	public UsuarioResponseTransfer create(@RequestBody UsuarioRequestTransfer usuarioRequestTransfer) {
 		return this.usuarioService.create(usuarioRequestTransfer);
 	}
 
