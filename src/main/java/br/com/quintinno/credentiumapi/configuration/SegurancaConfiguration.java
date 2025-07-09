@@ -22,7 +22,8 @@ public class SegurancaConfiguration {
 						.requestMatchers(HttpMethod.POST, "/credencium/criptografia/encoder/aes").permitAll()
 						.requestMatchers(HttpMethod.POST, "/credencium/criptografia/decoder/aes").permitAll()
 						.anyRequest().authenticated())
-				.cors(Customizer.withDefaults());
+				.cors(Customizer.withDefaults())
+				.httpBasic(Customizer.withDefaults());
 		return httpSecurity.build();
 	}
 
