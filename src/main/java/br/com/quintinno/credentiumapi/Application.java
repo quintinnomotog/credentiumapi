@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @RestController
 public class Application implements CommandLineRunner {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(Application.class);
 	
 	@Value("${spring.application.name}")
@@ -23,6 +23,9 @@ public class Application implements CommandLineRunner {
 	
 	@Value("${server.port}")
 	private String portaAPI;
+	
+	@Value("${spring.application.version}")
+	private String versaoAPI;
 	
 	private static final String BUILD_DATE = LocalDateTime.now()
             .format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
@@ -34,12 +37,15 @@ public class Application implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		logger.info(getInfoAPI());
+		System.out.println(getInfoAPI());
 	}
 	
 	@GetMapping({"", "/"})
 	public String getInfoAPI() {
 		return String.format("[ Application: %s | Version: %s | Port: %s | Build: %s ]",
-				nomeAPI, getClass().getPackage().getImplementationVersion(), portaAPI, BUILD_DATE);
+				nomeAPI, 
+				getClass().getPackage().getImplementationVersion() != null ? getClass().getPackage().getImplementationVersion() : versaoAPI, 
+				portaAPI, BUILD_DATE);
 	}
 
 }
