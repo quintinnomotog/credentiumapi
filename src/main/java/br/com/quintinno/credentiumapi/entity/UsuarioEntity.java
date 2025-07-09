@@ -54,6 +54,12 @@ public class UsuarioEntity implements Serializable {
 	
 	public UsuarioEntity() {}
 
+	public UsuarioEntity(String nome, String identificador, String senha) {
+		this.nome = nome;
+		this.identificador = identificador;
+		this.senha = senha;
+	}
+
 	public Long getCode() {
 		return code;
 	}
