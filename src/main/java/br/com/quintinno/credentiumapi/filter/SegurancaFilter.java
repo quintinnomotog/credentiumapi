@@ -25,7 +25,7 @@ import jakarta.servlet.http.HttpServletResponse;
 @Component
 public class SegurancaFilter extends OncePerRequestFilter {
 	
-	private static Logger logger = LoggerFactory.getLogger(SegurancaFilter.class);
+	private static final Logger log = LoggerFactory.getLogger(SegurancaFilter.class);
 	
 	private final TokenService tokenService;
 	
@@ -51,13 +51,13 @@ public class SegurancaFilter extends OncePerRequestFilter {
 			Optional<UsuarioEntity> usuarioEntityOptional = this.usuarioRepository.findByIdentificador(identificador).stream().findFirst();
 			if (usuarioEntityOptional.isEmpty()) {
 				// FIXME: Criar Filter de TraceID para mapear cada requisicao de ponta a ponta
-			    logger.warn("CredentiumAPI [SegurancaFilter]: Usuário com identificador {} não encontrado!", identificador);
+			    log.warn("CredentiumAPI [SegurancaFilter]: Usuário com identificador {} não encontrado!", identificador);
 			    filterChain.doFilter(request, response);
 			    return;
 			}
 			UsuarioEntity usuarioEntity = this.usuarioRepository.findByIdentificador(identificador).get(0);
 			if (usuarioEntity == null) {
-				logger.warn("CredentiumAPI [SegurancaFilter]: Usuário com identificador {} não encontrado!", identificador);
+				log.warn("CredentiumAPI [SegurancaFilter]: Usuário com identificador {} não encontrado!", identificador);
 				new RuntimeException("Usuário não Encontrado na Base de Dados!");
 			}
 			List<GrantedAuthority> roleList = Collections.singletonList(new SimpleGrantedAuthority(ROLE_USER));
@@ -75,7 +75,7 @@ public class SegurancaFilter extends OncePerRequestFilter {
 	private String recuperarTokenRequisicao(HttpServletRequest httpServletRequest) {
 		String header = httpServletRequest.getHeader(AUTHORIZATION);
 		if (header == null || !header.startsWith(BEARER)) {
-			logger.warn("CredentiumAPI [SegurancaFilter]: Token inválido!");
+			log.warn("CredentiumAPI [SegurancaFilter]: Token inválido!");
 			return null;
 		}
 		return header.replace(BEARER, "");
