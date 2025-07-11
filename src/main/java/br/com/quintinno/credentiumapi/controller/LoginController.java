@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.quintinno.credentiumapi.service.UsuarioService;
 import br.com.quintinno.credentiumapi.transfer.LoginRequestTransfer;
 import br.com.quintinno.credentiumapi.transfer.LoginResponseTransfer;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/credentium/api/login")
@@ -21,7 +22,7 @@ public class LoginController {
     }
 
     @PostMapping("/v1")
-    public ResponseEntity<LoginResponseTransfer> login(@RequestBody LoginRequestTransfer loginRequestTransfer) {
+    public ResponseEntity<LoginResponseTransfer> login(@RequestBody @Valid LoginRequestTransfer loginRequestTransfer) {
     	return ResponseEntity.ok(this.usuarioService.autenticar(loginRequestTransfer));
     }
 

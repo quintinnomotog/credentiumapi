@@ -1,9 +1,13 @@
 package br.com.quintinno.credentiumapi.transfer;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class LoginRequestTransfer {
 	
+	@NotBlank
 	private String identificador;
 	
+	@NotBlank
 	private String senha;
 
 	public String getIdentificador() {
