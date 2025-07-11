@@ -44,7 +44,7 @@ public class TokenService {
 		return Date.from(Instant.now().plus(Duration.ofHours(EXPIRATION)));
 	}
 	
-	public String validarToken(String token) {
+	public String extrairIdentificadorToken(String token) {
 		try {
 			Algorithm algorithm = Algorithm.HMAC256(SECRET_ALGORITHM);
 			return JWT.require(algorithm)

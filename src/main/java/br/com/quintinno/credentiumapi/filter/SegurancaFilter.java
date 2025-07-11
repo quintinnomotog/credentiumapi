@@ -17,6 +17,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import br.com.quintinno.credentiumapi.entity.UsuarioEntity;
 import br.com.quintinno.credentiumapi.repository.UsuarioRepository;
 import br.com.quintinno.credentiumapi.service.TokenService;
+import br.com.quintinno.credentiumapi.service.UsuarioService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,22 +32,24 @@ public class SegurancaFilter extends OncePerRequestFilter {
 	
 	private final UsuarioRepository usuarioRepository;
 	
+	private final UsuarioService usuarioService;
+	
 	private static final String AUTHORIZATION = "Authorization";
 	
 	private static final String BEARER = "Bearer ";
 	
 	private static final String ROLE_USER = "ROLE_USER";
 
-	public SegurancaFilter(TokenService tokenService, UsuarioRepository usuarioRepository) {
-		super();
+	public SegurancaFilter(TokenService tokenService, UsuarioRepository usuarioRepository, UsuarioService usuarioService) {
 		this.tokenService = tokenService;
 		this.usuarioRepository = usuarioRepository;
+		this.usuarioService = usuarioService;
 	}
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 		String token = this.recuperarTokenRequisicao(request);
-		String identificador = this.tokenService.validarToken(token);
+		String identificador = this.tokenService.extrairIdentificadorToken(token);
 		if (identificador != null) {
 			Optional<UsuarioEntity> usuarioEntityOptional = this.usuarioRepository.findByIdentificador(identificador).stream().findFirst();
 			if (usuarioEntityOptional.isEmpty()) {
@@ -55,7 +58,7 @@ public class SegurancaFilter extends OncePerRequestFilter {
 			    filterChain.doFilter(request, response);
 			    return;
 			}
-			UsuarioEntity usuarioEntity = this.usuarioRepository.findByIdentificador(identificador).get(0);
+			UsuarioEntity usuarioEntity = this.usuarioService.recuperarUsuarioEntity(identificador);
 			if (usuarioEntity == null) {
 				log.warn("CredentiumAPI [SegurancaFilter]: Usuário com identificador {} não encontrado!", identificador);
 				new RuntimeException("Usuário não Encontrado na Base de Dados!");
