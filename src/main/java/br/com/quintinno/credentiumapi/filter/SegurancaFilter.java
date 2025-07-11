@@ -54,7 +54,7 @@ public class SegurancaFilter extends OncePerRequestFilter {
 		// Recebe: /credenctium/**
 		String urlRequisicao = request.getRequestURI();
 
-		if (SegurancaUtility.isPublica(urlRequisicao)) {
+		if (SegurancaUtility.isUrlPublica(urlRequisicao)) {
 			filterChain.doFilter(request, response);
 			return;
 		}

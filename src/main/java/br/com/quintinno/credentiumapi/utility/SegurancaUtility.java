@@ -2,7 +2,7 @@ package br.com.quintinno.credentiumapi.utility;
 
 public class SegurancaUtility {
 
-	private static final String[] ROTAS_PUBLICAS = { 
+	private static final String[] ENDPOINT_PUBLIC = { 
 			"/credentium/api/login", 
 			"/credentium/api/login/v1",
 			"/credentium/api/usuario", 
@@ -11,8 +11,8 @@ public class SegurancaUtility {
 			"/credencium/criptografia/decoder/aes" 
 	};
 
-	public static boolean isPublica(String path) {
-		for (String rota : ROTAS_PUBLICAS) {
+	public static boolean isUrlPublica(String path) {
+		for (String rota : ENDPOINT_PUBLIC) {
 			if (path.startsWith(rota)) {
 				return true;
 			}
@@ -21,7 +21,7 @@ public class SegurancaUtility {
 	}
 
 	public static String[] getRotas() {
-		return ROTAS_PUBLICAS;
+		return ENDPOINT_PUBLIC;
 	}
 
 }
