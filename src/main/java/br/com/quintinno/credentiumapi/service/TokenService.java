@@ -33,6 +33,7 @@ public class TokenService {
 			return JWT.create()
 					.withIssuer(ORIGIN)
 					.withSubject(usuarioEntity.getIdentificador())
+					.withClaim("code", usuarioEntity.getCodePublic())
 					.withExpiresAt(getTempoExpiracao())
 					.sign(algorithm);
 		} catch (Exception e) {
