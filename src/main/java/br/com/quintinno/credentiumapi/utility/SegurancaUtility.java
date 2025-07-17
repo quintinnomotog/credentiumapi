@@ -2,7 +2,7 @@ package br.com.quintinno.credentiumapi.utility;
 
 public class SegurancaUtility {
 
-	private static final String[] ENDPOINT_PUBLIC = { 
+	private static final String[] ENDPOINT_PUBLIC = {
 			"/credentium/api/login", 
 			"/credentium/api/login/v1",
 			"/credentium/api/usuario", 

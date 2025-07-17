@@ -36,12 +36,8 @@
 	
 	<properties>
 		<java.version>17</java.version>
-	<build.version>${project.version}</build.version>
+		<build.version>${project.version}</build.version>
 	</properties>
-
-	<build>
-		<finalName>detectumapi</finalName>
-	</build>
 	
 	<dependencies>
 		

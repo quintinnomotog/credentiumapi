@@ -30,10 +30,11 @@ public class SegurancaConfiguration {
 				.addFilterBefore(segurancaFilter, UsernamePasswordAuthenticationFilter.class)
 				.authorizeHttpRequests(authorize -> authorize
 						// .requestMatchers(HttpMethod.GET, "/**").permitAll()
-						.requestMatchers(HttpMethod.POST, "/credencium/criptografia/encoder/aes").permitAll()
-						.requestMatchers(HttpMethod.POST, "/credencium/criptografia/decoder/aes").permitAll()
-						.requestMatchers(HttpMethod.POST, "/credentium/api/usuario/v1/**").permitAll()
+						.requestMatchers(HttpMethod.POST, "/credentium/criptografia/encoder/aes").permitAll()
+						.requestMatchers(HttpMethod.POST, "/credentium/criptografia/decoder/aes").permitAll()
+						.requestMatchers(HttpMethod.POST, "/credentium/api/usuario/v1").permitAll()
 						.requestMatchers(HttpMethod.POST, "/credentium/api/login/v1/**").permitAll()
+						.requestMatchers(HttpMethod.GET, "/credentium").permitAll()
 						.anyRequest().authenticated())
 				.cors(Customizer.withDefaults())
 				.csrf(csrf -> csrf.disable());

@@ -15,7 +15,7 @@ import br.com.quintinno.credentiumapi.transfer.UsuarioRequestTransfer;
 import br.com.quintinno.credentiumapi.transfer.UsuarioResponseTransfer;
 
 @RestController
-@RequestMapping("credentium/api/usuario")
+@RequestMapping("/credentium/api/usuario")
 public class UsuarioController {
 	
 	private final UsuarioService usuarioService;
