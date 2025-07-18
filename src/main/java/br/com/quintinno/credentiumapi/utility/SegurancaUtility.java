@@ -7,8 +7,9 @@ public class SegurancaUtility {
 			"/credentium/api/login/v1",
 			"/credentium/api/usuario", 
 			"/credentium/api/usuario/v1", 
-			"/credencium/criptografia/encoder/aes",
-			"/credencium/criptografia/decoder/aes" 
+			"/credentium/criptografia/encoder/aes",
+			"/credentium/criptografia/decoder/aes",
+			"actuator/info"
 	};
 
 	public static boolean isUrlPublica(String path) {

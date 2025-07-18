@@ -35,6 +35,7 @@ public class SegurancaConfiguration {
 						.requestMatchers(HttpMethod.POST, "/credentium/api/usuario/v1").permitAll()
 						.requestMatchers(HttpMethod.POST, "/credentium/api/login/v1/**").permitAll()
 						.requestMatchers(HttpMethod.GET, "/credentium").permitAll()
+						.requestMatchers(HttpMethod.GET, "/actuator/info").permitAll()
 						.anyRequest().authenticated())
 				.cors(Customizer.withDefaults())
 				.csrf(csrf -> csrf.disable());

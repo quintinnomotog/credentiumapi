@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.quintinno.credentiumapi.service.CriptografiaService;
 
 @RestController
-@RequestMapping("/credencium/criptografia")
+@RequestMapping("/credentium/criptografia")
 public class CriptografiaController {
 	
 	@Autowired
